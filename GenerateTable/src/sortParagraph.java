@@ -19,10 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class sortParagraph extends HttpServlet {
 	private String para = "";
-	public List<Column> wordAndOccurrence() throws IOException {
+	public List<Column> wordAndOccurrence(String FileName) throws IOException {
 		String buffer = null;
-		// get the file from WEB-INF.
-		String FileName = "/WEB-INF/paragraph.txt";
 		Map<String, Integer> map = new HashMap<>();
 		List<String> wordList = new ArrayList<>();
 		List<Column> sortedList = new ArrayList<>();
@@ -84,8 +82,10 @@ public class sortParagraph extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+	// get the file from WEB-INF.
+	String FileName = "/WEB-INF/paragraph.txt";
     	// Assign the sorted words and occurrences list to a List.
-    	List<Column> col =	wordAndOccurrence();
+    	List<Column> col =	wordAndOccurrence(FileName);
     	request.setAttribute("column", col);
     	request.setAttribute("para", para);
         RequestDispatcher view = request.getRequestDispatcher("paragraph.jsp");
